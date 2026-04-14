@@ -9,7 +9,7 @@ Requires PHP: 7.4
 WC requires at least: 7.9
 WC tested up to: 10.0
 Author: mosu-forge, SerHack, idealmsp
-Author URI: https://www.idealmsp.com/
+Author URI: https://www.idealmsp.com/ 
 */
 
 defined( 'ABSPATH' ) || exit;
