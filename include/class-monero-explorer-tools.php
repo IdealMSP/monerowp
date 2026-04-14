@@ -3,11 +3,12 @@
  * monero_explorer_tools.php
  *
  * Uses CURL to call API functions from the block explorer
- * https://xmrchain.net/
+ * https://xmr.triplebit.org
  *
  * @author Serhack
  * @author cryptochangements
  * @author mosu-forge
+ * @auther idealmsp
  *
  */
 
