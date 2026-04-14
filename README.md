@@ -1,116 +1,137 @@
 # Monero Payments for WooCommerce
 
-This fork restores compatibility with WooCommerce 8+ and adds support for the Cart & Checkout Blocks system.
-This plugin provides tools for accepting Monero payments. Users are responsible for complying with all applicable laws and regulations in their jurisdiction.
+A maintained fork of the original Monero WooCommerce Gateway, updated for modern WooCommerce compatibility, including support for Cart & Checkout Blocks.
 
-## Features
+This plugin enables WooCommerce stores to accept **Monero (XMR)** payments directly, without intermediaries.
 
-* Payment validation done through either `monero-wallet-rpc` or the [xmrchain.net blockchain explorer](https://xmrchain.net/).
-* Validates payments with `cron`, so does not require users to stay on the order confirmation page for their order to validate.
-* Order status updates are done through AJAX instead of Javascript page reloads.
-* Customers can pay with multiple transactions and are notified as soon as transactions hit the mempool.
-* Configurable block confirmations, from `0` for zero confirm to `60` for high ticket purchases.
-* Live price updates every minute; total amount due is locked in after the order is placed for a configurable amount of time (default 60 minutes) so the price does not change after order has been made.
-* Hooks into emails, order confirmation page, customer order history page, and admin order details page.
-* View all payments received to your wallet with links to the blockchain explorer and associated orders.
-* Optionally display all prices on your store in terms of Monero.
-* Shortcodes! Display exchange rates in numerous currencies.
+⚠️ **Legal Notice:**  
+This plugin provides tools for accepting cryptocurrency payments. Users are responsible for complying with all applicable laws and regulations in their jurisdiction.
 
-## Requirements
+## 🔧 What's New in This Fork
 
-* Monero wallet to receive payments - [GUI](https://github.com/monero-project/monero-gui/releases) - [CLI](https://github.com/monero-project/monero/releases) - [Paper](https://moneroaddress.org/)
-* [BCMath](http://php.net/manual/en/book.bc.php) - A PHP extension used for arbitrary precision maths
+- ✅ Compatibility with WooCommerce 8+
+- ✅ Support for Cart & Checkout Blocks
+- ✅ Modernized WooCommerce gateway integration
+- ✅ Bug fixes for checkout and order handling
+- ✅ Ongoing maintenance and updates
 
-## Installing the plugin
+## 🚀 Features
 
-### Automatic Method
+- Payment validation via:
+  - `monero-wallet-rpc` (recommended)
+  - Blockchain explorer (viewkey method)
+- Cron-based payment verification (no need to keep page open)
+- AJAX-based order status updates
+- Support for partial and multiple payments
+- Configurable confirmations (0–60 blocks)
+- Live exchange rate locking at checkout
+- Integration with:
+  - Order emails
+  - Order confirmation page
+  - Customer account pages
+  - Admin order view
+- Payment tracking with explorer links
+- Optional display of prices in Monero
+- Shortcodes for exchange rates and badges
 
-In the "Add Plugins" section of the WordPress admin UI, search for "monero" and click the Install Now button next to "Monero WooCommerce Extension" by mosu-forge, SerHack.  This will enable auto-updates, but only for official releases, so if you need to work from git master or your local fork, please use the manual method below.
+## 📦 Requirements
 
-### Manual Method
+- A Monero wallet:
+  - GUI Wallet: https://github.com/monero-project/monero-gui/releases
+  - CLI Wallet: https://github.com/monero-project/monero/releases
+  - Paper Wallet: https://moneroaddress.org/
+- PHP extension: BCMath
 
-* Download the plugin from the [releases page](https://github.com/monero-integrations/monerowp) or clone with `git clone https://github.com/monero-integrations/monerowp`
-* Unzip or place the `monero-woocommerce-gateway` folder in the `wp-content/plugins` directory.
-* Activate "Monero Woocommerce Gateway" in your WordPress admin dashboard.
-* It is highly recommended that you use native cronjobs instead of WordPress's "Poor Man's Cron" by adding `define('DISABLE_WP_CRON', true);` into your `wp-config.php` file and adding `* * * * * wget -q -O - https://yourstore.com/wp-cron.php?doing_wp_cron >/dev/null 2>&1` to your crontab.
+## 🛠 Installation
 
-## Option 1: Use your wallet address and viewkey
+### Manual Installation (Recommended)
 
-This is the easiest way to start accepting Monero on your website. You'll need:
+1. Download this repository or latest release  
+2. Upload the plugin folder to:  
+   `wp-content/plugins/`  
+3. Activate the plugin in WordPress Admin  
+4. Configure under:  
+   **WooCommerce → Settings → Payments → Monero**
 
-* Your Monero wallet address starting with `4`
-* Your wallet's secret viewkey
+## ⚙️ Configuration
 
-Then simply select the `viewkey` option in the settings page and paste your address and viewkey. You're all set!
+### Option 1 — Viewkey Method (Easiest)
 
-Note on privacy: when you validate transactions with your private viewkey, your viewkey is sent to (but not stored on) xmrchain.net over HTTPS. This could potentially allow an attacker to see your incoming, but not outgoing, transactions if they were to get his hands on your viewkey. Even if this were to happen, your funds would still be safe and it would be impossible for somebody to steal your money. For maximum privacy use your own `monero-wallet-rpc` instance.
+Requires:
+- Monero wallet address
+- Secret viewkey
 
-## Option 2: Using `monero-wallet-rpc`
+⚠️ Note:  
+Your viewkey is sent over HTTPS to a blockchain explorer for validation.  
+For maximum privacy, use the RPC method instead.
 
-The most secure way to accept Monero on your website. You'll need:
+### Option 2 — `monero-wallet-rpc` (Recommended)
 
-* Root access to your webserver
-* Latest [Monero-currency binaries](https://github.com/monero-project/monero/releases)
+Requires:
+- Server access
+- Monero binaries
 
-After downloading (or compiling) the Monero binaries on your server, install the [systemd unit files](https://github.com/monero-integrations/monerowp/tree/master/assets/systemd-unit-files) or run `monerod` and `monero-wallet-rpc` with `screen` or `tmux`. You can skip running `monerod` by using a remote node with `monero-wallet-rpc` by adding `--daemon-address node.moneroworld.com:18089` to the `monero-wallet-rpc.service` file.
+Run:
+- `monerod`
+- `monero-wallet-rpc`
 
-Note on security: using this option, while the most secure, requires you to run the Monero wallet RPC program on your server. Best practice for this is to use a view-only wallet since otherwise your server would be running a hot-wallet and a security breach could allow hackers to empty your funds.
+Optional:
+- Use a remote node instead of local daemon
 
-## Configuration
+🔐 **Security Tip:**  
+Use a **view-only wallet** to avoid exposing spend keys.
 
-* `Enable / Disable` - Turn on or off Monero gateway. (Default: Disable)
-* `Title` - Name of the payment gateway as displayed to the customer. (Default: Monero Gateway)
-* `Discount for using Monero` - Percentage discount applied to orders for paying with Monero. Can also be negative to apply a surcharge. (Default: 0)
-* `Order valid time` - Number of seconds after order is placed that the transaction must be seen in the mempool. (Default: 3600 [1 hour])
-* `Number of confirmations` - Number of confirmations the transaction must recieve before the order is marked as complete. Use `0` for nearly instant confirmation. (Default: 5)
-* `Confirmation Type` - Confirm transactions with either your viewkey, or by using `monero-wallet-rpc`. (Default: viewkey)
-* `Monero Address` (if confirmation type is viewkey) - Your public Monero address starting with 4. (No default)
-* `Secret Viewkey` (if confirmation type is viewkey) - Your *private* viewkey (No default)
-* `Monero wallet RPC Host/IP` (if confirmation type is `monero-wallet-rpc`) - IP address where the wallet rpc is running. It is highly discouraged to run the wallet anywhere other than the local server! (Default: 127.0.0.1)
-* `Monero wallet RPC port` (if confirmation type is `monero-wallet-rpc`) - Port the wallet rpc is bound to with the `--rpc-bind-port` argument. (Default 18080)
-* `Testnet` - Check this to change the blockchain explorer links to the testnet explorer. (Default: unchecked)
-* `SSL warnings` - Check this to silence SSL warnings. (Default: unchecked)
-* `Show QR Code` - Show payment QR codes. (Default: unchecked)
-* `Show Prices in Monero` - Convert all prices on the frontend to Monero. Experimental feature, only use if you do not accept any other payment option. (Default: unchecked)
-* `Display Decimals` (if show prices in Monero is enabled) - Number of decimals to round prices to on the frontend. The final order amount will not be rounded and will be displayed down to the nanoMonero. (Default: 12)
+## 🧩 WooCommerce Compatibility
 
-## Shortcodes
+| Feature | Supported |
+|--------|----------|
+| Classic Checkout | ✅ |
+| Block Checkout | ✅ |
+| HPOS | ✅ |
 
-This plugin makes available two shortcodes that you can use in your theme.
+## 📊 Shortcodes
 
-#### Live price shortcode
-
-This will display the price of Monero in the selected currency. If no currency is provided, the store's default currency will be used.
-
-```
+### Live Price
 [monero-price]
-[monero-price currency="BTC"]
 [monero-price currency="USD"]
-[monero-price currency="CAD"]
-[monero-price currency="EUR"]
-[monero-price currency="GBP"]
-```
-Will display:
-```
-1 XMR = 123.68000 USD
-1 XMR = 0.01827000 BTC
-1 XMR = 123.68000 USD
-1 XMR = 168.43000 CAD
-1 XMR = 105.54000 EUR
-1 XMR = 94.84000 GBP
-```
+
+### Monero Accepted Badge
+[monero-accepted-here]
+
+## ❤️ Donations
+
+If you find this plugin useful, consider supporting development:
+
+### Maintained Fork (Ideal Managed Solutions)
+- idealmsp:
+  47rBGAMwNEuFK2pMVwSFUzazgTTyJRsNUYZRuK6fWuJ6LTcoYFnGMcU3w51m69Rp5yQKrcGPv5gWkQUdqMVrFRA7RJLXjs7
+  
+### Original Authors
+- monero-integrations:  
+  44krVcL6TPkANjpFwS2GWvg1kJhTrN7y9heVeQiDJ3rP8iGbCd5GeA4f3c2NKYHC1R4mCgnW7dsUUUae2m9GiNBGT4T8s2X
+- ryo-currency:  
+  4A6BQp7do5MTxpCguq1kAS27yMLpbHcf89Ha2a8Shayt2vXkCr6QRpAXr1gLYRV5esfzoK3vLJTm5bDWk5gKmNrT6s6xZep
+
+## 📜 License
+
+This project is a maintained fork of software originally released under the MIT License.
+
+- Original code: MIT License  
+- This distribution: GPLv2 or later (for WordPress compatibility)  
+
+See the LICENSE file for full details.
 
 
-#### Monero accepted here badge
+## 🙏 Credits
 
-This will display a badge showing that you accept Monero-currency.
+- Original plugin by **mosu-forge & SerHack**
+- Additional contributions by **Monero Integrations** and **Ryo Currency Project**
+- Maintained and updated by **Ideal Managed Solutions**
 
-`[monero-accepted-here]`
 
-![Monero Accepted Here](/assets/images/monero-accepted-here.png?raw=true "Monero Accepted Here")
+## ⚠️ Disclaimer
 
-## Donations
+This plugin is provided "as is", without warranty of any kind.  
+Use at your own risk.
 
-monero-integrations: 44krVcL6TPkANjpFwS2GWvg1kJhTrN7y9heVeQiDJ3rP8iGbCd5GeA4f3c2NKYHC1R4mCgnW7dsUUUae2m9GiNBGT4T8s2X
-
-ryo-currency: 4A6BQp7do5MTxpCguq1kAS27yMLpbHcf89Ha2a8Shayt2vXkCr6QRpAXr1gLYRV5esfzoK3vLJTm5bDWk5gKmNrT6s6xZep
+Cryptocurrency payments are irreversible. Ensure proper configuration before accepting payments.
