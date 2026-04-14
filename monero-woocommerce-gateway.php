@@ -10,6 +10,8 @@ WC requires at least: 7.9
 WC tested up to: 10.0
 Author: mosu-forge, SerHack, idealmsp
 Author URI: https://www.idealmsp.com/ 
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
