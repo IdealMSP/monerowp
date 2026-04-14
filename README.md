@@ -1,4 +1,6 @@
-# Monero Gateway for WooCommerce
+# Monero Payments for WooCommerce
+
+This fork restores compatibility with WooCommerce 8+ and adds support for the Cart & Checkout Blocks system.
 
 ## Features
 
