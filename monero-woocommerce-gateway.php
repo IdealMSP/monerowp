@@ -1,17 +1,16 @@
 <?php
 /*
-Plugin Name: Monero Woocommerce Gateway
-Plugin URI: https://github.com/monero-integrations/monerowp
-Description: Extends WooCommerce by adding a Monero Gateway
-Version: 3.1.0
+Plugin Name: Monero Payments for Woocommerce
+Plugin URI: https://github.com/idealmsp/monerowp
+Description: Extends WooCommerce by adding a Monero payment gateway. Updated fork with compatibility updates for modern WooCommerce Checkout Blocks.
+Version: 1.0.0
 Requires at least: 6.4
 Requires PHP: 7.4
 WC requires at least: 7.9
 WC tested up to: 10.0
-Author: mosu-forge, SerHack
-Author URI: https://monerointegrations.com/
+Author: mosu-forge, SerHack, idealmsp
+Author URI: https://www.idealmsp.com/
 */
-// This code isn't for Dark Net Markets, please report them to Authority!
 
 defined( 'ABSPATH' ) || exit;
 
