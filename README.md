@@ -1,6 +1,7 @@
 # Monero Payments for WooCommerce
 
 This fork restores compatibility with WooCommerce 8+ and adds support for the Cart & Checkout Blocks system.
+This plugin provides tools for accepting Monero payments. Users are responsible for complying with all applicable laws and regulations in their jurisdiction.
 
 ## Features
 
