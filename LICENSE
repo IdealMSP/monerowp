@@ -23,7 +23,7 @@ SOFTWARE.
 
 GPL License (Distribution of This Fork)
 
-This project is a maintained fork of the original Monero WooCommerce Gateway.
+This project is an updated fork of the original Monero WooCommerce Gateway, providing support for the modern WooCommerce environment, including block checkout.
 
 Modifications and additional code:
 Copyright (c) 2026 Ideal Managed Solutions
