@@ -1,8 +1,7 @@
-MIT License
+MIT License (Original Work)
 
-Copyright (c) 2017-2018, Monero Integrations
-Copyright (c) 2018, Ryo Currency Project
-Copyright (c) 2026 Ideal Managed Solutions
+Copyright (c) 2017-2018 Monero Integrations
+Copyright (c) 2018 Ryo Currency Project
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,3 +20,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+GPL License (Distribution of This Fork)
+
+This project is a maintained fork of the original Monero WooCommerce Gateway.
+
+Modifications and additional code:
+Copyright (c) 2026 Ideal Managed Solutions
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see:
+https://www.gnu.org/licenses/gpl-2.0.html
+
+Attribution and Licensing Notes
+
+This software includes code originally released under the MIT License.
+The original MIT license and copyright notices are preserved above in compliance with its terms.
+This fork is distributed under the GNU General Public License v2 or later (GPLv2+), as required for compatibility with WordPress and WooCommerce.
+All modifications made in this fork are additionally licensed under GPLv2+.
+
+Disclaimer
+
+This plugin provides functionality for accepting cryptocurrency payments.
+Users are responsible for ensuring compliance with all applicable laws and regulations in their jurisdiction.
+No warranty is provided for financial, legal, or operational use.
